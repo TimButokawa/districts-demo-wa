@@ -14,7 +14,7 @@ class App extends Component {
             <Header/>
             <div style={{marginTop: '64px', flexGrow: 1, padding: '24px'}}>
               <Route exact path='/' component={Home}/>
-              <Route exact path='/districts' component={Districts}/>
+              <Route path='/districts' component={Districts}/>
             </div>
           </div>
         </MuiThemeProvider>
