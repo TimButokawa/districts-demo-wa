@@ -20,7 +20,7 @@ class Districts extends Component {
               title="Placeholder"
               />
             <CardMedia>
-              <img src="https://unsplash.it/720/200"/>
+              <img src="https://unsplash.it/720/200" alt=""/>
             </CardMedia>
             <CardContent>
               <Text type="headline" component="h2">Title</Text>
@@ -37,7 +37,7 @@ class Districts extends Component {
               title="Placeholder"
               />
             <CardMedia>
-              <img src="https://unsplash.it/720/200"/>
+              <img src="https://unsplash.it/720/200" alt=""/>
             </CardMedia>
             <CardContent>
               <Text type="headline" component="h2">Title</Text>
@@ -54,7 +54,7 @@ class Districts extends Component {
               title="Placeholder"
               />
             <CardMedia>
-              <img src="https://unsplash.it/720/200"/>
+              <img src="https://unsplash.it/720/200" alt=""/>
             </CardMedia>
             <CardContent>
               <Text type="headline" component="h2">Title</Text>
@@ -71,7 +71,7 @@ class Districts extends Component {
               title="Placeholder"
               />
             <CardMedia>
-              <img src="https://unsplash.it/720/200"/>
+              <img src="https://unsplash.it/720/200" alt=""/>
             </CardMedia>
             <CardContent>
               <Text type="headline" component="h2">Title</Text>
