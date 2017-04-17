@@ -1,4 +1,5 @@
 export const REQUEST_DISTRICTS = 'REQUEST_DISTRICTS';
+export const SHOW_ALL_FAVORITES= 'SHOW_ALL_FAVORITES';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 export const REMOVE_ALL_FAVORITES = 'REMOVE_ALL_FAVORITES';
@@ -6,6 +7,12 @@ export const REMOVE_ALL_FAVORITES = 'REMOVE_ALL_FAVORITES';
 export function requestDistricts() {
   return {
     type: REQUEST_DISTRICTS
+  }
+}
+
+export function viewFavoriteDistricts() {
+  return {
+    type: SHOW_ALL_FAVORITES
   }
 }
 

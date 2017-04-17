@@ -5,7 +5,7 @@ import * as Actions from '../../actions';
 
 const mapStateToProps = state => {
   return {
-    districts: state.districts.data,
+    districts: state.districts,
     favorites: state.favorites
   };
 };

@@ -74,7 +74,7 @@ class Districts extends Component {
 Districts.propTypes = {
   action: PropTypes.object,
   districts: PropTypes.array.isRequired,
-  favorites: PropTypes.array.isRequired
+  favorites: PropTypes.object.isRequired
 };
 
 export default Districts;
