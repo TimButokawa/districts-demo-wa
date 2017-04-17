@@ -1,69 +1,37 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'material-ui/Layout';
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardHeader
-} from 'material-ui/Card';
-import Text from 'material-ui/Text';
-import Favorite from 'material-ui-icons/Favorite';
-import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
+import DistrictCard from '../../components/district-card/DistrictCard.component';
 
 class Districts extends Component {
   constructor(props) {
     super(props);
-    this.handleAddToFavorites = this.handleAddToFavorites.bind(this);
-    this.handleRemoveFavorite = this.handleRemoveFavorite.bind(this);
     this.handleRemoveFavorites = this.handleRemoveFavorites.bind(this);
-  }
-
-  handleAddToFavorites(district) {
-    this.props.action.addToFavorites(district);
-  }
-
-  handleRemoveFavorite(district) {
-    this.props.action.removeFavorite(district)
+    this.handleViewFavorites = this.handleViewFavorites.bind(this);
   }
 
   handleRemoveFavorites() {
     this.props.action.removeFavorites()
   }
 
+  handleViewFavorites() {
+    this.props.action.viewFavoriteDistricts()
+  }
+
   render() {
-    const {districts, favorites} = this.props;
-    const content = districts.map(district => {
-      return (
-        <Layout key={district.id} item xs={12} sm={6} md={3}>
-          <Card>
-            <CardHeader
-              avatar={district.isAFavorite ? <Favorite/> : <FavoriteBorder/>}
-              title={district.name}
-              subheader={district.isAFavorite ?
-                <span className="cursor-pointer" onClick={() => this.handleRemoveFavorite(district)}>remove from favorites</span> :
-                <span className="cursor-pointer" onClick={() => this.handleAddToFavorites(district)}>add to favorites</span>
-              }
-              />
-            <CardMedia>
-              <img src="https://unsplash.it/720/200" alt=""/>
-            </CardMedia>
-            <CardContent>
-              <Text type="headline" component="h2">{district.name}</Text>
-              <Text component="p">
-                {district.id}
-              </Text>
-            </CardContent>
-          </Card>
-        </Layout>
-      )
+    const {districts, favorites, action} = this.props;
+    const content = favorites.displayFavorites ? favorites.data.map(favorite => {
+      return <DistrictCard key={favorite.id} item={favorite} action={action}/>;
+    }) : districts.map(district => {
+      return <DistrictCard key={district.id} item={district} action={action}/>;
     });
 
     return (
       <Layout container gutter={16}>
         <Layout item xs={12}>
-          <span>Favorites: {favorites.length}</span><br/>
-          <span className="cursor-pointer" onClick={() => this.handleRemoveFavorites()}>Clear Favorites</span>
+          <span>Favorites: {favorites.data.length}</span><br/>
+          <span className="cursor-pointer" onClick={() => this.handleRemoveFavorites()}>Clear Favorites</span><br/>
+          <span className="cursor-pointer" onClick={() => this.handleViewFavorites()}>View Favorites</span>
         </Layout>
         {content}
       </Layout>
