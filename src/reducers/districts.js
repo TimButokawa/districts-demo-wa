@@ -1,7 +1,9 @@
 import {REQUEST_DISTRICTS, REQUEST_DISTRICTS_SUCCESS, REQUEST_DISTRICTS_FAILURE} from '../actions';
 
 const initialState = {
-  data:[],
+  data:[{
+    isAFavorite: false
+  }],
   isLoading: false
 };
 
@@ -16,7 +18,7 @@ export default function districtsReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        data: action.payload
+        data: action.payload.data
       }
     case REQUEST_DISTRICTS_FAILURE:
       return {

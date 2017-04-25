@@ -24,10 +24,10 @@ class Districts extends Component {
 
   render() {
     const {districts, favorites, action} = this.props;
-    const content = favorites.displayFavorites ? favorites.data.map(favorite => {
-      return <DistrictCard key={favorite.id} item={favorite} action={action}/>;
-    }) : districts.data.map(district => {
-      return <DistrictCard key={district.id} item={district} action={action}/>;
+    const content = favorites.displayFavorites ? favorites.data.map((favorite, i) => {
+      return <DistrictCard key={i} item={favorite} action={action}/>;
+    }) : districts.data.map((district, i) => {
+      return <DistrictCard key={i} item={district} action={action}/>;
     });
 
     return (

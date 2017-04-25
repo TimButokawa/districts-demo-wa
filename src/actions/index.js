@@ -17,7 +17,6 @@ export const requestDistricts = () => {
       method: 'get',
       url: 'https://data.wa.gov/resource/qdkt-urie.json',
       headers: {
-        'Host': 'data.wa.gov',
         'Accept': 'application/json',
         'X-App-token': 'F835Hdr4HhiQpkbeoslWHrJ29'
       }
