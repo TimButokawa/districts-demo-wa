@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {
+  BarChart,
+  Bar,
+  ResponsiveContainer
+} from 'recharts';
 import Layout from 'material-ui/Layout';
 import {
   Card,
@@ -10,6 +15,7 @@ import {
 import Text from 'material-ui/Text';
 import Favorite from 'material-ui-icons/Favorite';
 import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
+import _ from 'lodash';
 
 class DistrictCard extends Component {
   constructor(props) {
@@ -28,6 +34,8 @@ class DistrictCard extends Component {
 
   render() {
     const {district} = this.props;
+    const chartData = _formatDataForChart(district);
+
     return (
       <Layout item xs={12} sm={6} md={3}>
         <Card>
@@ -39,7 +47,11 @@ class DistrictCard extends Component {
             }
             />
           <CardMedia>
-            <img src="https://unsplash.it/720/200" alt=""/>
+            <ResponsiveContainer width="100%" height={150} debounce={1}>
+              <BarChart data={chartData}>
+                <Bar isAnimationActive={false} dataKey='value' fill='#8884d8'/>
+              </BarChart>
+            </ResponsiveContainer>
           </CardMedia>
           <CardContent>
             <Text type="headline" component="h3">Legislative District {district.legislative_district}</Text>
@@ -48,6 +60,24 @@ class DistrictCard extends Component {
       </Layout>
     );
   }
+}
+
+function _formatDataForChart(data) {
+  const chartData = [];
+
+  _.forEach(data, (v, k) => {
+    if(_.includes(k, 'estimated_total_population_')) {
+      const index = _.lastIndexOf(k, '_');
+      const year = _.parseInt(k.substr(index + 1));
+      const population = _.parseInt(v);
+      chartData.push({
+        year,
+        value: population
+      })
+    }
+  });
+
+  return chartData;
 }
 
 DistrictCard.propTypes = {
