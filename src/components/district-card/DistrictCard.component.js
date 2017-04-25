@@ -33,8 +33,7 @@ class DistrictCard extends Component {
         <Card>
           <CardHeader
             avatar={item.isAFavorite ? <Favorite/> : <FavoriteBorder/>}
-            title={item.name}
-            subheader={item.isAFavorite ?
+            title={item.isAFavorite ?
               <span className="cursor-pointer" onClick={() => this.handleRemoveFavorite(item)}>remove from favorites</span> :
               <span className="cursor-pointer" onClick={() => this.handleAddToFavorites(item)}>add to favorites</span>
             }
@@ -43,8 +42,7 @@ class DistrictCard extends Component {
             <img src="https://unsplash.it/720/200" alt=""/>
           </CardMedia>
           <CardContent>
-            <Text type="headline" component="h2">{item.name}</Text>
-            <Text component="p">{item.id}</Text>
+            <Text type="headline" component="h3">Legislative District {item.legislative_district}</Text>
           </CardContent>
         </Card>
       </Layout>

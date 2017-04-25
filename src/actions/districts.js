@@ -11,7 +11,7 @@ export const requestDistricts = () => {
     })
     return axios({
       method: 'get',
-      url: 'https://data.wa.gov/resource/qdkt-urie.json',
+      url: 'https://data.wa.gov/resource/x2b6-bwh6.json',
       headers: {
         'Accept': 'application/json',
         'X-App-token': 'F835Hdr4HhiQpkbeoslWHrJ29'
