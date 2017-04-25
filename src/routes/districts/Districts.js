@@ -29,7 +29,7 @@ class Districts extends Component {
 
   render() {
     const {districts, favorites, favoritesAction} = this.props;
-    const displayFavorites = _.filter(districts.data, 'isAFavorite')
+    const displayFavorites = _.filter(districts.data, 'isAFavorite');
     const displayDistricts = favorites.displayFavorites ? displayFavorites : districts.data;
 
     const content = displayDistricts.map((district, i) => {
@@ -50,7 +50,8 @@ class Districts extends Component {
 }
 
 Districts.propTypes = {
-  action: PropTypes.object,
+  districtAction: PropTypes.object,
+  favoritesAction: PropTypes.object,
   districts: PropTypes.object.isRequired,
   favorites: PropTypes.object.isRequired
 };
