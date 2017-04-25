@@ -2,8 +2,7 @@ import {ADD_FAVORITE, REMOVE_FAVORITE, REMOVE_ALL_FAVORITES, SHOW_ALL_FAVORITES}
 import _ from 'lodash';
 
 const initialState = {
-  displayFavorites: false,
-  data: []
+  displayFavorites: false
 };
 
 export default function favoritesReducer(state = initialState, payload) {
@@ -11,23 +10,17 @@ export default function favoritesReducer(state = initialState, payload) {
     case ADD_FAVORITE:
       payload.district.isAFavorite = true;
       return {
-        ...state,
-        data: [...state.data, payload.district]
-      }
+        ...state
+      };
 
     case REMOVE_FAVORITE:
-      const index = _.findIndex(state.data, o => {
-        return o.id === payload.district.id;
-      });
-
       payload.district.isAFavorite = false;
       return {
-        ...state,
-        data: state.data.filter((_, i) => i !== index)
-      }
+        ...state
+      };
 
     case REMOVE_ALL_FAVORITES:
-      _.forEach(state.data, o => {
+      _.forEach(payload.districts, o => {
         o.isAFavorite = false
       });
 
@@ -37,7 +30,7 @@ export default function favoritesReducer(state = initialState, payload) {
       return {
         ...state,
         displayFavorites: true
-      }
+      };
 
     default:
       return state;

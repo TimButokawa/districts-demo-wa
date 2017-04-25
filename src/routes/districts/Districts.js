@@ -12,11 +12,12 @@ class Districts extends Component {
   }
 
   handleRemoveFavorites() {
-    this.props.favoritesAction.removeFavorites()
+    const {districts} = this.props;
+    this.props.favoritesAction.removeFavorites(districts);
   }
 
   handleViewFavorites() {
-    this.props.favoritesAction.viewFavoriteDistricts()
+    this.props.favoritesAction.viewFavoriteDistricts();
   }
 
   componentWillMount() {
@@ -28,7 +29,8 @@ class Districts extends Component {
 
   render() {
     const {districts, favorites, favoritesAction} = this.props;
-    const displayDistricts = favorites.displayFavorites ? _.filter(districts.data, 'isAFavorite') : districts.data;
+    const displayFavorites = _.filter(districts.data, 'isAFavorite')
+    const displayDistricts = favorites.displayFavorites ? displayFavorites : districts.data;
 
     const content = displayDistricts.map((district, i) => {
       return <DistrictCard key={i} item={district} action={favoritesAction}/>;
@@ -37,7 +39,7 @@ class Districts extends Component {
     return (
       <Layout container gutter={16}>
         <Layout item xs={12}>
-          <span>Favorites: {favorites.data.length}</span><br/>
+          <span>Favorites: {displayFavorites.length}</span><br/>
           <span className="cursor-pointer" onClick={() => this.handleRemoveFavorites()}>Clear Favorites</span><br/>
           <span className="cursor-pointer" onClick={() => this.handleViewFavorites()}>View Favorites</span>
         </Layout>
