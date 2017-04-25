@@ -1,9 +1,7 @@
 import {REQUEST_DISTRICTS, REQUEST_DISTRICTS_SUCCESS, REQUEST_DISTRICTS_FAILURE} from '../actions';
 
 const initialState = {
-  data:[{
-    isAFavorite: false
-  }],
+  data:[],
   isLoading: false
 };
 

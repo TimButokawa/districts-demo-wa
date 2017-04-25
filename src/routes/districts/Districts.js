@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'material-ui/Layout';
 import DistrictCard from '../../components/district-card/DistrictCard.component';
+import _ from 'lodash';
 
 class Districts extends Component {
   constructor(props) {
@@ -19,14 +20,17 @@ class Districts extends Component {
   }
 
   componentWillMount() {
-    this.props.action.requestDistricts();
+    const {districts} = this.props;
+    if (!districts.data.length) {
+      this.props.action.requestDistricts();
+    }
   }
 
   render() {
     const {districts, favorites, action} = this.props;
-    const content = favorites.displayFavorites ? favorites.data.map((favorite, i) => {
-      return <DistrictCard key={i} item={favorite} action={action}/>;
-    }) : districts.data.map((district, i) => {
+    const displayDistricts = favorites.displayFavorites ? _.filter(districts.data, 'isAFavorite') : districts.data;
+
+    const content = displayDistricts.map((district, i) => {
       return <DistrictCard key={i} item={district} action={action}/>;
     });
 
