@@ -1,4 +1,4 @@
-import {REQUEST_DISTRICTS, REQUEST_DISTRICTS_SUCCESS, REQUEST_DISTRICTS_FAILURE} from '../actions';
+import {REQUEST_DISTRICTS, REQUEST_DISTRICTS_SUCCESS, REQUEST_DISTRICTS_FAILURE} from '../actions/districts';
 
 const initialState = {
   data:[],

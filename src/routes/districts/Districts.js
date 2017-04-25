@@ -12,26 +12,26 @@ class Districts extends Component {
   }
 
   handleRemoveFavorites() {
-    this.props.action.removeFavorites()
+    this.props.favoritesAction.removeFavorites()
   }
 
   handleViewFavorites() {
-    this.props.action.viewFavoriteDistricts()
+    this.props.favoritesAction.viewFavoriteDistricts()
   }
 
   componentWillMount() {
     const {districts} = this.props;
     if (!districts.data.length) {
-      this.props.action.requestDistricts();
+      this.props.districtAction.requestDistricts();
     }
   }
 
   render() {
-    const {districts, favorites, action} = this.props;
+    const {districts, favorites, favoritesAction} = this.props;
     const displayDistricts = favorites.displayFavorites ? _.filter(districts.data, 'isAFavorite') : districts.data;
 
     const content = displayDistricts.map((district, i) => {
-      return <DistrictCard key={i} item={district} action={action}/>;
+      return <DistrictCard key={i} item={district} action={favoritesAction}/>;
     });
 
     return (

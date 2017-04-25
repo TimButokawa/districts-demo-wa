@@ -1,7 +1,8 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Districts from './Districts';
-import * as Actions from '../../actions';
+import * as DistrictActions from '../../actions/districts';
+import * as FavoritesActions from '../../actions/favorites';
 
 const mapStateToProps = state => {
   return {
@@ -12,7 +13,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    action: bindActionCreators(Actions, dispatch)
+    districtAction: bindActionCreators(DistrictActions, dispatch),
+    favoritesAction: bindActionCreators(FavoritesActions, dispatch)
   };
 }
 

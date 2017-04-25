@@ -1,7 +1,4 @@
-import {ADD_FAVORITE} from '../actions';
-import {REMOVE_FAVORITE} from '../actions';
-import {REMOVE_ALL_FAVORITES} from '../actions';
-import {SHOW_ALL_FAVORITES} from '../actions';
+import {ADD_FAVORITE, REMOVE_FAVORITE, REMOVE_ALL_FAVORITES, SHOW_ALL_FAVORITES} from '../actions/favorites';
 import _ from 'lodash';
 
 const initialState = {
