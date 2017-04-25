@@ -33,7 +33,7 @@ class Districts extends Component {
     const displayDistricts = favorites.displayFavorites ? displayFavorites : districts.data;
 
     const content = displayDistricts.map((district, i) => {
-      return <DistrictCard key={i} item={district} action={favoritesAction}/>;
+      return <DistrictCard key={i} district={district} action={favoritesAction}/>;
     });
 
     return (
