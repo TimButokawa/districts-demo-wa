@@ -18,11 +18,15 @@ class Districts extends Component {
     this.props.action.viewFavoriteDistricts()
   }
 
+  componentWillMount() {
+    this.props.action.requestDistricts();
+  }
+
   render() {
     const {districts, favorites, action} = this.props;
     const content = favorites.displayFavorites ? favorites.data.map(favorite => {
       return <DistrictCard key={favorite.id} item={favorite} action={action}/>;
-    }) : districts.map(district => {
+    }) : districts.data.map(district => {
       return <DistrictCard key={district.id} item={district} action={action}/>;
     });
 
@@ -41,7 +45,7 @@ class Districts extends Component {
 
 Districts.propTypes = {
   action: PropTypes.object,
-  districts: PropTypes.array.isRequired,
+  districts: PropTypes.object.isRequired,
   favorites: PropTypes.object.isRequired
 };
 

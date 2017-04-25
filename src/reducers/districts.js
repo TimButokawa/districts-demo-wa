@@ -1,22 +1,28 @@
-import {REQUEST_DISTRICTS} from '../actions';
+import {REQUEST_DISTRICTS, REQUEST_DISTRICTS_SUCCESS, REQUEST_DISTRICTS_FAILURE} from '../actions';
 
-const initialState = [{
-    id: 1,
-    name: 'District 1',
-    isAFavorite: false
-}];
+const initialState = {
+  data:[],
+  isLoading: false
+};
 
 export default function districtsReducer(state = initialState, action) {
   switch(action.type) {
     case REQUEST_DISTRICTS:
-      return [{
-            id: 2,
-            name: 'District 2'
-        },
-        {
-            id: 3,
-            name: 'District 3'
-      }]; // TODO: action payload
+      return {
+        ...state,
+        isLoading: true
+      }
+    case REQUEST_DISTRICTS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload
+      }
+    case REQUEST_DISTRICTS_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
     default:
       return state;
   }
