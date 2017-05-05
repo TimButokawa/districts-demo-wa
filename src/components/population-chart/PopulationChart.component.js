@@ -18,7 +18,7 @@ class PopulationChart extends Component {
     return (
       <ResponsiveContainer width="100%" height={150} debounce={1}>
         <BarChart data={chartData}>
-          <Bar dataKey='value' fill='#8884d8'/>
+          <Bar dataKey='value' fill='#4FC3F7'/>
         </BarChart>
       </ResponsiveContainer>
     );

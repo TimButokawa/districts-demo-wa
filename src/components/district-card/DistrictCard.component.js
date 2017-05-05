@@ -13,6 +13,12 @@ import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
 import _ from 'lodash';
 import PopulationChart from '../population-chart/PopulationChart.component';
 
+const styles = {
+  favorite: {
+    color: '#F44336'
+  }
+};
+
 class DistrictCard extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +41,7 @@ class DistrictCard extends Component {
       <Layout item xs={12} sm={6} md={3}>
         <Card>
           <CardHeader
-            avatar={district.isAFavorite ? <Favorite/> : <FavoriteBorder/>}
+            avatar={district.isAFavorite ? <Favorite style={styles.favorite}/> : <FavoriteBorder style={styles.favorite}/>}
             title={district.isAFavorite ?
               <span className="cursor-pointer" onClick={() => this.handleRemoveFavorite(district)}>remove from favorites</span> :
               <span className="cursor-pointer" onClick={() => this.handleAddToFavorites(district)}>add to favorites</span>
