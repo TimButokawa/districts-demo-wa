@@ -3,6 +3,8 @@ import axios from 'axios';
 export const REQUEST_DISTRICTS = 'REQUEST_DISTRICTS';
 export const REQUEST_DISTRICTS_SUCCESS = 'REQUEST_DISTRICTS_SUCCESS';
 export const REQUEST_DISTRICTS_FAILURE = 'REQUEST_DISTRICTS_FAILURE';
+export const SHOW_MORE_DISTRICTS = 'SHOW_MORE_DISTRICTS';
+export const SHOW_FEWER_DISTRICTS = 'SHOW_FEWER_DISTRICTS';
 
 export const requestDistricts = () => {
   return dispatch => {
@@ -28,3 +30,10 @@ export const requestDistricts = () => {
     });
   }
 };
+
+export const showMoreDistricts = (count = 10) => {
+  return {
+    type: SHOW_MORE_DISTRICTS,
+    payload: count
+  };
+}

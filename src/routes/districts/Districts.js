@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'material-ui/Layout';
 import DistrictCard from '../../components/district-card/DistrictCard.component';
-import _ from 'lodash';
+import Button from 'material-ui/Button';
+import {slice, filter} from 'lodash';
 
 class Districts extends Component {
   constructor(props) {
     super(props);
     this.handleRemoveFavorites = this.handleRemoveFavorites.bind(this);
     this.handleViewFavorites = this.handleViewFavorites.bind(this);
+    this.handleShowMore = this.handleShowMore.bind(this);
   }
 
   handleRemoveFavorites() {
@@ -20,21 +22,33 @@ class Districts extends Component {
     this.props.favoritesAction.viewFavoriteDistricts();
   }
 
+  handleShowMore() {
+    const {visibleIndexes} = this.props;
+    this.props.districtAction.showMoreDistricts(visibleIndexes[1]);
+  }
+
   componentWillMount() {
     const {districts} = this.props;
-    if (!districts.data.length) {
+    if (!districts.length) {
       this.props.districtAction.requestDistricts();
     }
   }
 
   render() {
-    const {districts, favorites, favoritesAction} = this.props;
-    const displayFavorites = _.filter(districts.data, 'isAFavorite');
-    const displayDistricts = favorites.displayFavorites ? displayFavorites : districts.data;
+    const {districts, favorites, favoritesAction, visibleIndexes} = this.props;
+    const visibleDistricts = slice(districts, visibleIndexes[0], visibleIndexes[1])
+    const displayFavorites = filter(districts, 'isAFavorite');
+    const displayDistricts = favorites.displayFavorites ? displayFavorites : visibleDistricts;
 
-    const content = displayDistricts.map((district, i) => {
+    const districtCards = displayDistricts.map((district, i) => {
       return <DistrictCard key={i} district={district} action={favoritesAction}/>;
     });
+
+    const showMore = visibleIndexes[1] <= districts.length ? (
+      <Button onClick={() => this.handleShowMore()}>
+        Show More
+      </Button>
+    ) : null;
 
     return (
       <Layout container gutter={16}>
@@ -43,7 +57,12 @@ class Districts extends Component {
           <span className="cursor-pointer" onClick={() => this.handleRemoveFavorites()}>Clear Favorites</span><br/>
           <span className="cursor-pointer" onClick={() => this.handleViewFavorites()}>View Favorites</span>
         </Layout>
-        {content}
+        {districtCards}
+        <Layout container align="center" justify="center">
+          <Layout item>
+            {showMore}
+          </Layout>
+        </Layout>
       </Layout>
     );
   }
@@ -52,8 +71,9 @@ class Districts extends Component {
 Districts.propTypes = {
   districtAction: PropTypes.object,
   favoritesAction: PropTypes.object,
-  districts: PropTypes.object.isRequired,
-  favorites: PropTypes.object.isRequired
+  districts: PropTypes.array.isRequired,
+  favorites: PropTypes.object.isRequired,
+  visibleIndexes: PropTypes.array.isRequired
 };
 
 export default Districts;
