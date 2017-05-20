@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Layout from 'material-ui/Layout';
 import DistrictCard from '../../components/district-card/DistrictCard.component';
 import Button from 'material-ui/Button';
+import Loader from '../../components/loader/Loader.component';
 import {slice, filter} from 'lodash';
 
 class Districts extends Component {
@@ -40,9 +41,9 @@ class Districts extends Component {
     const displayFavorites = filter(districts, 'isAFavorite');
     const displayDistricts = favorites.displayFavorites ? displayFavorites : visibleDistricts;
 
-    const districtCards = displayDistricts.map((district, i) => {
+    const districtCards = displayDistricts.length && !favorites.displayFavorites ? displayDistricts.map((district, i) => {
       return <DistrictCard key={i} district={district} action={favoritesAction}/>;
-    });
+    }) : <Loader/>;
 
     const showMore = visibleIndexes[1] <= districts.length ? (
       <Button onClick={() => this.handleShowMore()}>
