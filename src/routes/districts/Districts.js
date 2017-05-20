@@ -41,7 +41,7 @@ class Districts extends Component {
     const displayFavorites = filter(districts, 'isAFavorite');
     const displayDistricts = favorites.displayFavorites ? displayFavorites : visibleDistricts;
 
-    const districtCards = displayDistricts.length && !favorites.displayFavorites ? displayDistricts.map((district, i) => {
+    const districtCards = displayDistricts.length ? displayDistricts.map((district, i) => {
       return <DistrictCard key={i} district={district} action={favoritesAction}/>;
     }) : <Loader/>;
 
