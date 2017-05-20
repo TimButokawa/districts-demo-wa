@@ -45,7 +45,7 @@ class Districts extends Component {
       return <DistrictCard key={i} district={district} action={favoritesAction}/>;
     }) : <Loader/>;
 
-    const showMore = visibleIndexes[1] <= districts.length ? (
+  const showMore = visibleIndexes[1] <= displayDistricts.length ? (
       <Button onClick={() => this.handleShowMore()}>
         Show More
       </Button>

@@ -26,6 +26,6 @@ export function removeFavorite(district) {
 export function removeFavorites(districts) {
   return {
     type: REMOVE_ALL_FAVORITES,
-    districts: districts
+    districts
   };
 }
