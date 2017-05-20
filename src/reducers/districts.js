@@ -3,7 +3,7 @@ import {REQUEST_DISTRICTS, REQUEST_DISTRICTS_SUCCESS, REQUEST_DISTRICTS_FAILURE,
 
 const initialState = Map({
   data:[],
-  visibleIndexes: [0, 10],
+  visibleIndexes: [0, 8],
   isLoading: false
 });
 

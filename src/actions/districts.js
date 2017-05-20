@@ -31,7 +31,7 @@ export const requestDistricts = () => {
   }
 };
 
-export const showMoreDistricts = (count = 10) => {
+export const showMoreDistricts = (count = 8) => {
   return {
     type: SHOW_MORE_DISTRICTS,
     payload: count
