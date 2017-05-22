@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "immutable": "^3.8.1",
+    "leaflet": "^1.0.3",
     "lodash": "^4.17.4",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.2",
