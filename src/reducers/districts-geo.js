@@ -3,7 +3,8 @@ import {REQUEST_DISTRICTS_GEO, REQUEST_DISTRICTS_GEO_SUCCESS, REQUEST_DISTRICTS_
 
 const initialState = Map({
   data:[],
-  isLoading: false
+  isLoading: false,
+  map: null
 });
 
 export default function districtsGeoReducer(state = initialState, action) {

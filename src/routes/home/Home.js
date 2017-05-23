@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Layout from 'material-ui/Layout';
 import {Link} from 'react-router-dom';
 import L from 'leaflet';
+import {mapConfig} from '../../utils/map.utils';
 
 const styles = {
   map: {
-    height: '500px'
+    height: '600px'
+  },
+  borders: {
+    color: '#4d4d4d',
+    weight: 1
   }
 };
 
@@ -18,18 +24,18 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const accessToken = 'pk.eyJ1IjoidGJ1dG9yIiwiYSI6ImNqMzBhYzgyeDAwOGczNW9rbDNhNDdhcGYifQ.q7B9wNdpPz_I6fIKmS2ZFw';
-    const myMap = L.map('mapId', {
-        center: [47.3816144, -119.5585346],
-        zoom: 7
-    });
+    const districtMap = L.map(mapConfig.id, mapConfig.default);
+    this.setState({map: districtMap});
 
-    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
-      accessToken: accessToken
-    }).addTo(myMap);
+    L.tileLayer(mapConfig.tileUrl, {accessToken: mapConfig.accessToken}).addTo(districtMap);
   }
 
   render() {
+    const {districtsGeo} = this.props;
+    if (districtsGeo.length && this.state) {
+      L.geoJSON(districtsGeo, styles.borders).addTo(this.state.map);
+    }
+
     return (
       <Layout container gutter={16}>
         <Layout item xs={12}>
@@ -40,5 +46,10 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  districtAction: PropTypes.object,
+  districtsGeo: PropTypes.array
+};
 
 export default Home;

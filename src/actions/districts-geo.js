@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {formatDistrictGeo} from '../utils/map.utils';
 
 export const REQUEST_DISTRICTS_GEO = 'REQUEST_DISTRICTS_GEO';
 export const REQUEST_DISTRICTS_GEO_SUCCESS = 'REQUEST_DISTRICTS_GEO_SUCCESS';
@@ -19,7 +20,7 @@ export const requestDistrictsGeo = () => {
     }).then(districts => {
       dispatch({
         type: REQUEST_DISTRICTS_GEO_SUCCESS,
-        payload: districts
+        payload: formatDistrictGeo(districts)
       })
     }).catch(() => {
       dispatch({
