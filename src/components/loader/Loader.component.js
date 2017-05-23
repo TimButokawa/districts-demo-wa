@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {CircularProgress} from 'material-ui/Progress';
-import Paper from 'material-ui/Paper';
 
 const styles = {
   background: {
@@ -10,10 +9,7 @@ const styles = {
     height: '100%',
     width: '100%',
     zIndex: 10000,
-    backgroundColor: 'rgba(0, 0, 0, .2)'
-  },
-  container: {
-    padding: '16px'
+    backgroundColor: 'rgba(255, 255, 255, .8)'
   },
   loader: {
     position: 'absolute',
@@ -28,9 +24,7 @@ class Loader extends Component {
     return (
       <div style={styles.background}>
         <div style={styles.loader}>
-          <Paper style={styles.container}>
-            <CircularProgress/>
-          </Paper>
+          <CircularProgress/>
         </div>
       </div>
     );
