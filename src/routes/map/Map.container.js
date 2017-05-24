@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getDistrictsGeo} from '../../selectors/districts-geo';
-import Home from './Home';
+import Map from './Map';
 import * as DistrictGeoActions from '../../actions/districts-geo';
 
 const mapStateToProps = state => {
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

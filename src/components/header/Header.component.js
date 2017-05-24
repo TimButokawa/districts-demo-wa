@@ -17,7 +17,7 @@ class Header extends Component {
     return (
       <AppBar style={styles.bar}>
         <Toolbar>
-          <Text style={styles.primaryText} type="title">Districts</Text>
+          <Text style={styles.primaryText} type="title">Washington State Legislative Districts</Text>
         </Toolbar>
       </AppBar>
     );
