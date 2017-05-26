@@ -5,7 +5,8 @@ import Text from 'material-ui/Text';
 
 const styles = {
   bar: {
-    backgroundColor: '#4FC3F7'
+    backgroundColor: '#4FC3F7',
+    height: '48px'
   },
   primaryText: {
     color: '#FEFEFE'
@@ -17,7 +18,7 @@ class Header extends Component {
     return (
       <AppBar style={styles.bar}>
         <Toolbar>
-          <Text style={styles.primaryText} type="title">Washington State Legislative Districts</Text>
+          <Text style={styles.primaryText} type="subheading">Washington State Legislative Districts</Text>
         </Toolbar>
       </AppBar>
     );

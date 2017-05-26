@@ -13,7 +13,7 @@ class App extends Component {
         <MuiThemeProvider>
           <div>
             <Header/>
-            <div style={{marginTop: '64px', flexGrow: 1, padding: '24px'}}>
+            <div style={{marginTop: '48px', flexGrow: 1, padding: '24px'}}>
               <Route exact path='/' component={Home}/>
               <Route path='/map' component={Map}/>
               <Route path='/districts' component={Districts}/>
