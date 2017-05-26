@@ -1,4 +1,2 @@
-## Washington State Districts
-WIP - Maybe a map, maybe some demographics information
-___
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+## Washington State Legislative Districts
+__A react/redux project that includes a map with district borders and info cards with demographics information.__
