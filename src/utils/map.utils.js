@@ -6,7 +6,10 @@ export const mapConfig = {
   tileUrl: 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}',
   default: {
     center: [47.5, -120.7401],
-    zoom: 7
+    zoom: 7,
+    minZoom: 7,
+    maxZoom: 11,
+    scrollWheelZoom: false
   }
 };
 
