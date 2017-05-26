@@ -23,18 +23,12 @@ const styles = {
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.handleViewCards = this.handleViewCards.bind(this);
-    this.handleViewMap = this.handleViewMap.bind(this);
+    this.handleNavigation = this.handleNavigation.bind(this);
   }
 
-  handleViewCards() {
+  handleNavigation(view) {
     const {history} = this.props;
-    history.push('districts');
-  }
-
-  handleViewMap() {
-    const {history} = this.props;
-    history.push('map');
+    history.push(view);
   }
 
   render() {
@@ -53,10 +47,10 @@ class Home extends Component {
         <Layout style={styles.layout} item xs={12} sm={6}>
           <Layout container direction="row" align="center" justify="center">
             <Layout item>
-              <Button onClick={() => this.handleViewMap()}>View Map</Button>
+              <Button onClick={() => this.handleNavigation('map')}>View Districts Map</Button>
             </Layout>
             <Layout item>
-              <Button onClick={() => this.handleViewCards()}>View Cards</Button>
+              <Button onClick={() => this.handleNavigation('districts')}>View District Cards</Button>
             </Layout>
           </Layout>
         </Layout>
