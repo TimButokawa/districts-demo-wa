@@ -17,10 +17,7 @@ export const formatDistrictGeo = districts => {
   const geoData = [];
   forEach(districts.data, district => {
     district = mapKeys(district, (v, k) => {
-      if (k === 'the_geom') {
-        return k = 'geometry';
-      }
-      return k;
+      return k === 'the_geom' ? k = 'geometry' : k;
     });
 
     const properties = {
