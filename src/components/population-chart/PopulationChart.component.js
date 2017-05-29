@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {
   BarChart,
   Bar,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Tooltip,
+  XAxis
 } from 'recharts';
 import _ from 'lodash';
 
@@ -18,7 +20,9 @@ class PopulationChart extends Component {
     return (
       <ResponsiveContainer width="100%" height={150} debounce={1}>
         <BarChart data={chartData}>
-          <Bar dataKey='value' fill='#4FC3F7'/>
+          <Bar dataKey='population' fill='#4FC3F7'/>
+          <XAxis dataKey='year' hide/>
+          <Tooltip/>
         </BarChart>
       </ResponsiveContainer>
     );
@@ -35,7 +39,7 @@ function _formatDataForChart(data) {
       const population = _.parseInt(v);
       chartData.push({
         year,
-        value: population
+        population
       })
     }
   });
