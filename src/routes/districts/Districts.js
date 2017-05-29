@@ -10,8 +10,6 @@ import {slice, filter} from 'lodash';
 class Districts extends Component {
   constructor(props) {
     super(props);
-    this.handleRemoveFavorites = this.handleRemoveFavorites.bind(this);
-    this.handleViewFavorites = this.handleViewFavorites.bind(this);
     this.handleShowMore = this.handleShowMore.bind(this);
     this.handleNavigation = this.handleNavigation.bind(this);
   }
@@ -19,15 +17,6 @@ class Districts extends Component {
   handleNavigation(route) {
     const {history} = this.props;
     history.push(route);
-  }
-
-  handleRemoveFavorites() {
-    const {districts} = this.props;
-    this.props.favoritesAction.removeFavorites(districts);
-  }
-
-  handleViewFavorites() {
-    this.props.favoritesAction.viewFavoriteDistricts();
   }
 
   handleShowMore() {
@@ -60,11 +49,6 @@ class Districts extends Component {
 
     return (
       <Layout container gutter={16}>
-        <Layout item xs={12}>
-          <span>Favorites: {displayFavorites.length}</span><br/>
-          <span className="cursor-pointer" onClick={() => this.handleRemoveFavorites()}>Clear Favorites</span><br/>
-          <span className="cursor-pointer" onClick={() => this.handleViewFavorites()}>View Favorites</span>
-        </Layout>
         {districtCards}
         <Layout container align="center" justify="center">
           <Layout item>
