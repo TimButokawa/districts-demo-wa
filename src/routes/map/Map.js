@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'material-ui/Layout';
+import Button from 'material-ui/Button';
+import {withRouter} from 'react-router';
 import L from 'leaflet';
 import {mapConfig} from '../../utils/map.utils';
 import Loader from '../../components/loader/Loader.component';
@@ -16,6 +18,16 @@ const styles = {
 };
 
 class Map extends Component {
+  constructor(props) {
+    super(props);
+    this.handleNavigation = this.handleNavigation.bind(this);
+  }
+
+  handleNavigation(route) {
+    const {history} = this.props;
+    history.push(route);
+  }
+
   componentWillMount() {
     const {districtsGeo} = this.props;
     if (!districtsGeo.length) {
@@ -47,6 +59,11 @@ class Map extends Component {
           {loader}
           <div style={styles.map} id="mapId"></div>
         </Layout>
+        <Layout container align="center" justify="center">
+          <Layout item>
+            <Button onClick={() => this.handleNavigation('/')}>Back</Button>
+          </Layout>
+        </Layout>
       </Layout>
     );
   }
@@ -65,7 +82,8 @@ function _onEachFeature(feature, layer) {
 
 Map.propTypes = {
   districtAction: PropTypes.object,
-  districtsGeo: PropTypes.array
+  districtsGeo: PropTypes.array,
+  history: PropTypes.object
 };
 
-export default Map;
+export default withRouter(Map);

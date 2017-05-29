@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'material-ui/Layout';
+import {withRouter} from 'react-router';
 import DistrictCard from '../../components/district-card/DistrictCard.component';
 import Button from 'material-ui/Button';
 import Loader from '../../components/loader/Loader.component';
@@ -12,6 +13,12 @@ class Districts extends Component {
     this.handleRemoveFavorites = this.handleRemoveFavorites.bind(this);
     this.handleViewFavorites = this.handleViewFavorites.bind(this);
     this.handleShowMore = this.handleShowMore.bind(this);
+    this.handleNavigation = this.handleNavigation.bind(this);
+  }
+
+  handleNavigation(route) {
+    const {history} = this.props;
+    history.push(route);
   }
 
   handleRemoveFavorites() {
@@ -61,6 +68,7 @@ class Districts extends Component {
         {districtCards}
         <Layout container align="center" justify="center">
           <Layout item>
+            <Button onClick={() => this.handleNavigation('/')}>Back</Button>
             {showMore}
           </Layout>
         </Layout>
@@ -74,7 +82,8 @@ Districts.propTypes = {
   favoritesAction: PropTypes.object,
   districts: PropTypes.array.isRequired,
   favorites: PropTypes.object.isRequired,
-  visibleIndexes: PropTypes.array.isRequired
+  visibleIndexes: PropTypes.array.isRequired,
+  history: PropTypes.object
 };
 
-export default Districts;
+export default withRouter(Districts);
