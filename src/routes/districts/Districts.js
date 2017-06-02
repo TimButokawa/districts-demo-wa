@@ -12,6 +12,7 @@ class Districts extends Component {
     super(props);
     this.handleShowMore = this.handleShowMore.bind(this);
     this.handleNavigation = this.handleNavigation.bind(this);
+    this.handleToggleChart = this.handleToggleChart.bind(this);
   }
 
   handleNavigation(route) {
@@ -24,6 +25,11 @@ class Districts extends Component {
     this.props.districtAction.showMoreDistricts(visibleIndexes[1]);
   }
 
+  handleToggleChart() {
+    const {chartType} = this.props;
+    this.props.interfaceAction.toggleChart(chartType);
+  }
+
   componentWillMount() {
     const {districts} = this.props;
     if (!districts.length) {
@@ -32,13 +38,25 @@ class Districts extends Component {
   }
 
   render() {
-    const {districts, favorites, favoritesAction, visibleIndexes} = this.props;
+    const {
+      districts,
+      favorites,
+      favoritesAction,
+      visibleIndexes,
+      chartType
+    } = this.props;
     const visibleDistricts = slice(districts, visibleIndexes[0], visibleIndexes[1])
     const displayFavorites = filter(districts, 'isAFavorite');
     const displayDistricts = favorites.displayFavorites ? displayFavorites : visibleDistricts;
 
     const districtCards = displayDistricts.length ? displayDistricts.map((district, i) => {
-      return <DistrictCard key={i} district={district} action={favoritesAction}/>;
+      return (
+        <DistrictCard
+          key={i}
+          district={district}
+          action={favoritesAction}
+          chartType={chartType}/>
+      );
     }) : <Loader/>;
 
     const showMore = visibleIndexes[1] <= displayDistricts.length ? (
@@ -52,6 +70,7 @@ class Districts extends Component {
         {districtCards}
         <Layout container align="center" justify="center">
           <Layout item>
+            <Button onClick={() => this.handleToggleChart()}>Toggle Chart Style</Button>
             <Button onClick={() => this.handleNavigation('/')}>Back</Button>
             {showMore}
           </Layout>
@@ -64,6 +83,8 @@ class Districts extends Component {
 Districts.propTypes = {
   districtAction: PropTypes.object,
   favoritesAction: PropTypes.object,
+  interfaceAction: PropTypes.object,
+  chartType: PropTypes.string,
   districts: PropTypes.array.isRequired,
   favorites: PropTypes.object.isRequired,
   visibleIndexes: PropTypes.array.isRequired,
