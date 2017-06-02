@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
+  AreaChart,
+  Area,
   BarChart,
   Bar,
   ResponsiveContainer,
@@ -10,20 +12,34 @@ import {
 import _ from 'lodash';
 
 class PopulationChart extends Component {
-  shouldComponentUpdate() {
+  shouldComponentUpdate(nextProps, nextState) {
+    const {chartType} = this.props;
+    if (chartType !== nextProps.chartType) {
+      return true;
+    }
+
     return false;
   }
 
   render() {
-    const {data} = this.props;
+    const {data, chartType} = this.props;
     const chartData = _formatDataForChart(data);
-    return (
+
+    return chartType === 'bar' ? (
       <ResponsiveContainer width="100%" height={150} debounce={1}>
         <BarChart data={chartData}>
           <Bar dataKey='population' fill='#4FC3F7'/>
           <XAxis dataKey='year' hide/>
           <Tooltip/>
         </BarChart>
+      </ResponsiveContainer>
+    ) : (
+      <ResponsiveContainer width="100%" height={150} debounce={1}>
+        <AreaChart data={chartData}>
+          <Area dataKey='population' fill='#4FC3F7'/>
+          <XAxis dataKey='year' hide/>
+          <Tooltip/>
+        </AreaChart>
       </ResponsiveContainer>
     );
   }
@@ -48,7 +64,8 @@ function _formatDataForChart(data) {
 }
 
 PopulationChart.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  chartType: PropTypes.string.isRequired
 };
 
 export default PopulationChart;
