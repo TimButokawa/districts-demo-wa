@@ -4,11 +4,9 @@ import Layout from 'material-ui/Layout';
 import {
   Card,
   CardMedia,
-  CardActions,
   CardContent,
   CardHeader
 } from 'material-ui/Card';
-import Button from 'material-ui/Button';
 import Favorite from 'material-ui-icons/Favorite';
 import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
 import _ from 'lodash';
@@ -37,7 +35,7 @@ class DistrictCard extends Component {
   }
 
   render() {
-    const {district} = this.props;
+    const {district, chartType} = this.props;
     const title = 'District ' + district.legislative_district;
     const avatar = district.isAFavorite ?
       <Favorite onClick={() => this.handleRemoveFavorite(district)} style={styles.favorite}/> :
@@ -52,7 +50,7 @@ class DistrictCard extends Component {
             subheader="Estimated total population 2000 - 2016"
             />
           <CardMedia>
-            <PopulationChart data={district}/>
+            <PopulationChart data={district} chartType={chartType}/>
           </CardMedia>
           <CardContent>
             <ul style={styles.list}>
@@ -60,9 +58,6 @@ class DistrictCard extends Component {
               <li><strong>Total Change 2010 - 2015: </strong>{district.numeric_change_in_population_2010_to_2015}</li>
             </ul>
           </CardContent>
-          <CardActions>
-            <Button>Area chart</Button>
-          </CardActions>
         </Card>
       </Layout>
     );
@@ -71,7 +66,8 @@ class DistrictCard extends Component {
 
 DistrictCard.propTypes = {
   action: PropTypes.object.isRequired,
-  district: PropTypes.object.isRequired
+  district: PropTypes.object.isRequired,
+  chartType: PropTypes.string.isRequired
 };
 
 export default DistrictCard;
