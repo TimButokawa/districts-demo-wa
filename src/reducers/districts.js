@@ -2,7 +2,7 @@ import {Map} from 'immutable'
 import {REQUEST_DISTRICTS, REQUEST_DISTRICTS_SUCCESS, REQUEST_DISTRICTS_FAILURE, SHOW_MORE_DISTRICTS} from '../actions/districts';
 
 const initialState = Map({
-  data:[],
+  data: [],
   visibleIndexes: [0, 8],
   isLoading: false
 });
