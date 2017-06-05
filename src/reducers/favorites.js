@@ -1,8 +1,8 @@
-import {ADD_FAVORITE, REMOVE_FAVORITE, REMOVE_ALL_FAVORITES, SHOW_ALL_FAVORITES} from '../actions/favorites';
+import {ADD_FAVORITE, REMOVE_FAVORITE, REMOVE_ALL_FAVORITES} from '../actions/favorites';
 import _ from 'lodash';
 
 const initialState = {
-  displayFavorites: false
+  data: []
 };
 
 export default function favoritesReducer(state = initialState, payload) {
@@ -10,13 +10,17 @@ export default function favoritesReducer(state = initialState, payload) {
     case ADD_FAVORITE:
       payload.district.isAFavorite = true;
       return {
-        ...state
+        data: [...state.data, payload.district.legislative_district]
       };
 
     case REMOVE_FAVORITE:
       payload.district.isAFavorite = false;
+      const index = _.indexOf(state.data, payload.district.legislative_district)
       return {
-        ...state
+        data: [
+          ...state.data.slice(0, index),
+          ...state.data.slice(index + 1)
+        ]
       };
 
     case REMOVE_ALL_FAVORITES:
@@ -25,12 +29,6 @@ export default function favoritesReducer(state = initialState, payload) {
       });
 
       return initialState;
-
-    case SHOW_ALL_FAVORITES:
-      return {
-        ...state,
-        displayFavorites: true
-      };
 
     default:
       return state;
