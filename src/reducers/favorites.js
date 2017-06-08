@@ -1,5 +1,5 @@
 import {ADD_FAVORITE, REMOVE_FAVORITE, REMOVE_ALL_FAVORITES} from '../actions/favorites';
-import _ from 'lodash';
+import {indexOf, forEach} from 'lodash';
 
 const initialState = {
   data: []
@@ -15,7 +15,7 @@ export default function favoritesReducer(state = initialState, payload) {
 
     case REMOVE_FAVORITE:
       payload.district.isAFavorite = false;
-      const index = _.indexOf(state.data, payload.district.legislative_district)
+      const index = indexOf(state.data, payload.district.legislative_district)
       return {
         data: [
           ...state.data.slice(0, index),
@@ -24,7 +24,7 @@ export default function favoritesReducer(state = initialState, payload) {
       };
 
     case REMOVE_ALL_FAVORITES:
-      _.forEach(payload.districts, o => {
+      forEach(payload.districts, o => {
         o.isAFavorite = false
       });
 
