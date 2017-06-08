@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Header from './components/header/Header.component';
+import Header from './components/header/Header.container';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Districts from './routes/districts/Districts.container';
 import Map from './routes/map/Map.container';
