@@ -30,7 +30,7 @@ class DistrictMap extends Component {
       }).addTo(this.state.map);
     }
 
-    return <div style={styles.map} id="mapId"></div>
+    return <div style={styles.map} id="mapId"></div>;
   }
 }
 
