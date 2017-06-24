@@ -8,7 +8,9 @@ import Text from 'material-ui/Text';
 const styles = {
   bar: {
     backgroundColor: '#4FC3F7',
-    height: '48px'
+    height: '48px',
+    position: 'static',
+    boxShadow: 'none'
   },
   primaryText: {
     color: '#FEFEFE',

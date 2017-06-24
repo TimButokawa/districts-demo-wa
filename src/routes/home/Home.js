@@ -1,66 +1,49 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Layout from 'material-ui/Layout';
-import {Card, CardContent, CardMedia} from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import {withRouter} from 'react-router';
-import buildingTwo from '../../assets/building-two.jpg';
+import Paper from 'material-ui/Paper';
+import Map from '../../components/district-map/DistrictMap.component';
+
 const styles = {
-  image: {
-    maxWidth: '100%',
-    display: 'block'
+  container: {
+    height: '100%',
+    display: 'flex',
   },
-  caption: {
-    fontSize: '12px',
-    fontStyle: 'italic',
-    color: '#5E5E5E'
+  aside: {
+    padding: '16px'
   },
-  layout: {
-    alignSelf: 'center'
+  mainContent: {
+    flexGrow: '1',
+    padding: '16px'
   }
 };
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.handleNavigation = this.handleNavigation.bind(this);
-  }
 
-  handleNavigation(view) {
-    const {history} = this.props;
-    history.push(view);
+  componentWillMount() {
+    const {districtsGeo} = this.props;
+    if (!districtsGeo.length) {
+      this.props.districtAction.requestDistrictsGeo();
+    }
   }
 
   render() {
+    const {districtsGeo} = this.props;
     return (
-      <Layout container direction="row" gutter={16}>
-        <Layout item xs={12} sm={6}>
-          <Card>
-            <CardMedia>
-              <img style={styles.image} src={buildingTwo} alt="Old Capitol Building"/>
-            </CardMedia>
-            <CardContent>
-              <span style={styles.caption}>"Washington Territory was created in 1853. It was carved out of the Oregon territory and consisted originally of all of what is now Washington and part of Idaho and Montana. President Franklin Pierce appointed Isaac I. Stevens, first territorial governor and he, upon arrival in the territory, called for elections to the legislative assembly which was to consist of a nine-member Council and an eighteen-member House." - History of the Washington Legislature, by Don Brazier</span>
-            </CardContent>
-          </Card>
-        </Layout>
-        <Layout style={styles.layout} item xs={12} sm={6}>
-          <Layout container direction="row" align="center" justify="center">
-            <Layout item>
-              <Button onClick={() => this.handleNavigation('map')}>View Districts Map</Button>
-            </Layout>
-            <Layout item>
-              <Button onClick={() => this.handleNavigation('districts')}>View District Cards</Button>
-            </Layout>
-          </Layout>
-        </Layout>
-      </Layout>
+      <div style={styles.container}>
+        <Paper elevation={1} style={styles.aside}>
+          districts
+        </Paper>
+        <div style={styles.mainContent}>
+          <Map districtsGeo={districtsGeo}/>
+        </div>
+      </div>
     );
   }
 }
 
 Home.propTypes = {
-  history: PropTypes.object
+  districts: PropTypes.array,
+  districtsGeo: PropTypes.array
 }
 
-export default withRouter(Home);
+export default Home;
