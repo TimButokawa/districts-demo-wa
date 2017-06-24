@@ -15,6 +15,7 @@ body {
   display: flex;
   flex: 1;
 }
+
 [data-reactroot] {
   flex: 1;
 }
