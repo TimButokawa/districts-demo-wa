@@ -5,7 +5,8 @@ import Divider from 'material-ui/Divider';
 import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
 import Favorite from 'material-ui-icons/Favorite';
 import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
-import Map from '../../components/district-map/DistrictMap.component';
+import DistrictMap from '../../components/district-map/DistrictMap.component';
+import Loader from '../../components/loader/Loader.component';
 
 const styles = {
   container: {
@@ -73,7 +74,7 @@ class Home extends Component {
           </List>
         </Paper>
         <div style={styles.mainContent}>
-          <Map districtsGeo={districtsGeo}/>
+          {districtsGeo.length ? <DistrictMap districtsGeo={districtsGeo}/> : <Loader/>}
         </div>
       </div>
     );
