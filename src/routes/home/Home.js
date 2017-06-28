@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
 import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
 import Favorite from 'material-ui-icons/Favorite';
 import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
@@ -48,7 +49,7 @@ class Home extends Component {
   }
 
   render() {
-    const {districtsGeo, districts, favoritesAction} = this.props;
+    const {districtsGeo, districts} = this.props;
 
     return (
       <div style={styles.container}>
@@ -56,15 +57,17 @@ class Home extends Component {
           <List>
             {districts.map((district, i) => {
               return (
-                <ListItem
-                  key={i}>
-                  <ListItemIcon>
-                    {district.isAFavorite ?
-                      <Favorite onClick={() => this.handleRemoveFavorite(district)} style={styles.favorite}/> :
-                      <FavoriteBorder onClick={() => this.handleAddToFavorites(district)} style={styles.favorite}/>}
-                  </ListItemIcon>
-                  <ListItemText primary={'District ' + district.legislative_district}/>
-                </ListItem>
+                <div key={i}>
+                  <ListItem>
+                    <ListItemIcon>
+                      {district.isAFavorite ?
+                        <Favorite onClick={() => this.handleRemoveFavorite(district)} style={styles.favorite}/> :
+                        <FavoriteBorder onClick={() => this.handleAddToFavorites(district)} style={styles.favorite}/>}
+                    </ListItemIcon>
+                    <ListItemText primary={'District ' + district.legislative_district}/>
+                  </ListItem>
+                  <Divider/>
+                </div>
               );
             })}
           </List>
