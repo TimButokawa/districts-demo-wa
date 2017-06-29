@@ -28,6 +28,7 @@ class Home extends Component {
     super(props);
     this.handleAddToFavorites = this.handleAddToFavorites.bind(this);
     this.handleRemoveFavorite = this.handleRemoveFavorite.bind(this);
+    this.handleGetDistrictGeo = this.handleGetDistrictGeo.bind(this);
   }
 
   handleAddToFavorites(district) {
@@ -36,6 +37,10 @@ class Home extends Component {
 
   handleRemoveFavorite(district) {
     this.props.favoritesAction.removeFavorite(district)
+  }
+
+  handleGetDistrictGeo(district) {
+    this.props.districtGeoAction.getDistrictGeo(district);
   }
 
   componentWillMount() {
@@ -50,8 +55,7 @@ class Home extends Component {
   }
 
   render() {
-    const {districtsGeo, districts} = this.props;
-
+    const {districtsGeo, selectedDistrict, districts} = this.props;
     return (
       <div style={styles.container}>
         <Paper style={styles.aside}>
@@ -59,7 +63,9 @@ class Home extends Component {
             {districts.map((district, i) => {
               return (
                 <div key={i}>
-                  <ListItem>
+                  <ListItem
+                    button
+                    onClick={() => this.handleGetDistrictGeo(district.legislative_district)}>
                     <ListItemIcon>
                       {district.isAFavorite ?
                         <Favorite onClick={() => this.handleRemoveFavorite(district)} style={styles.favorite}/> :
@@ -74,7 +80,7 @@ class Home extends Component {
           </List>
         </Paper>
         <div style={styles.mainContent}>
-          {districtsGeo.length ? <DistrictMap districtsGeo={districtsGeo}/> : <Loader/>}
+          {districtsGeo.length ? <DistrictMap districtsGeo={districtsGeo} districtGeo={selectedDistrict}/> : <Loader/>}
         </div>
       </div>
     );
@@ -84,6 +90,7 @@ class Home extends Component {
 Home.propTypes = {
   districts: PropTypes.array,
   districtsGeo: PropTypes.array,
+  selectedDistrict: PropTypes.array,
   districtGeoAction: PropTypes.object,
   districtActions: PropTypes.object,
   favoritesAction: PropTypes.object
