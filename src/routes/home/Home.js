@@ -20,6 +20,10 @@ const styles = {
   mainContent: {
     flexGrow: '1',
     padding: '16px'
+  },
+  favorite: {
+    color: '#F44336',
+    cursor: 'pointer'
   }
 };
 
