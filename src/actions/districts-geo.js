@@ -4,6 +4,7 @@ import {formatDistrictGeo} from '../utils/map.utils';
 export const REQUEST_DISTRICTS_GEO = 'REQUEST_DISTRICTS_GEO';
 export const REQUEST_DISTRICTS_GEO_SUCCESS = 'REQUEST_DISTRICTS_GEO_SUCCESS';
 export const REQUEST_DISTRICTS_GEO_FAILURE = 'REQUEST_DISTRICTS_GEO_FAILURE';
+export const GET_DISTRICT_GEO = 'GET_DISTRICT_GEO';
 
 export const requestDistrictsGeo = () => {
   return dispatch => {
@@ -28,4 +29,11 @@ export const requestDistrictsGeo = () => {
       })
     });
   }
+};
+
+export function getDistrictGeo(district) {
+  return {
+    type: GET_DISTRICT_GEO,
+    district
+  };
 };
