@@ -5,6 +5,7 @@ export const REQUEST_DISTRICTS_GEO = 'REQUEST_DISTRICTS_GEO';
 export const REQUEST_DISTRICTS_GEO_SUCCESS = 'REQUEST_DISTRICTS_GEO_SUCCESS';
 export const REQUEST_DISTRICTS_GEO_FAILURE = 'REQUEST_DISTRICTS_GEO_FAILURE';
 export const GET_DISTRICT_GEO = 'GET_DISTRICT_GEO';
+export const GET_FAVORITE_DISTRICTS_GEO = 'GET_FAVORITE_DISTRICTS_GEO';
 
 export const requestDistrictsGeo = () => {
   return dispatch => {
@@ -37,3 +38,9 @@ export function getDistrictGeo(district) {
     district
   };
 };
+
+export function getFavoriteDistrictsGeo() {
+  return {
+    type: GET_FAVORITE_DISTRICTS_GEO
+  }
+}

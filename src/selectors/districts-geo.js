@@ -5,3 +5,7 @@ export function getDistrictsGeo(state) {
 export function getDistrictGeo(state) {
   return state.districtsGeo.get('selectedDistrict');
 }
+
+export function getFavoriteDistrictsGeo(state) {
+  return state.districtsGeo.get('favoriteDistricts');
+}
