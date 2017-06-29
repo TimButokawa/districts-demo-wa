@@ -48,34 +48,30 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    const {districtsGeo, districts} = this.props;
+    const {districtsGeo} = this.props;
     if (!districtsGeo.length) {
       this.props.districtGeoAction.requestDistrictsGeo();
-    }
-
-    if (!districts.length) {
-      this.props.districtAction.requestDistricts();
     }
   }
 
   render() {
-    const {districtsGeo, selectedDistrict, districts} = this.props;
+    const {districtsGeo, selectedDistrict} = this.props;
     return (
       <div style={styles.container}>
         <Paper style={styles.aside}>
           <List>
-            {districts.map((district, i) => {
+            {districtsGeo.map((district, i) => {
               return (
                 <div key={i}>
                   <ListItem
                     button
-                    onClick={() => this.handleGetDistrictGeo(district.legislative_district)}>
+                    onClick={() => this.handleGetDistrictGeo(district.district)}>
                     <ListItemIcon>
                       {district.isAFavorite ?
                         <Favorite onClick={() => this.handleRemoveFavorite(district)} style={styles.favorite}/> :
                         <FavoriteBorder onClick={() => this.handleAddToFavorites(district)} style={styles.favorite}/>}
                     </ListItemIcon>
-                    <ListItemText primary={'District ' + district.legislative_district}/>
+                    <ListItemText primary={district.name}/>
                   </ListItem>
                   <Divider/>
                 </div>
@@ -92,11 +88,9 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  districts: PropTypes.array,
   districtsGeo: PropTypes.array,
   selectedDistrict: PropTypes.array,
   districtGeoAction: PropTypes.object,
-  districtActions: PropTypes.object,
   favoritesAction: PropTypes.object
 }
 
