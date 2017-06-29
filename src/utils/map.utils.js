@@ -15,6 +15,7 @@ export const mapConfig = {
 
 export const formatDistrictGeo = districts => {
   const geoData = [];
+
   forEach(districts.data, district => {
     district = mapKeys(district, (v, k) => {
       return k === 'the_geom' ? k = 'geometry' : k;
@@ -27,6 +28,7 @@ export const formatDistrictGeo = districts => {
     assign(district, {properties}, {type: 'Feature'});
     geoData.push(district);
   });
-  districts.data = geoData;
+
+  districts.data = geoData.sort((a, b) => a.district - b.district);
   return districts;
 }
