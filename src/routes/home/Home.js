@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Paper from 'material-ui/Paper';
-import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
-import Favorite from 'material-ui-icons/Favorite';
-import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
 import DistrictMap from '../../components/district-map/DistrictMap.component';
+import DistrictList from '../../components/district-list/DistrictList.component';
 import Loader from '../../components/loader/Loader.component';
+import Paper from 'material-ui/Paper';
 
 const styles = {
   container: {
@@ -19,32 +17,10 @@ const styles = {
   mainContent: {
     flexGrow: '1',
     padding: '16px'
-  },
-  favorite: {
-    color: '#F44336',
-    cursor: 'pointer'
   }
 };
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.handleAddToFavorites = this.handleAddToFavorites.bind(this);
-    this.handleRemoveFavorite = this.handleRemoveFavorite.bind(this);
-    this.handleGetDistrictGeo = this.handleGetDistrictGeo.bind(this);
-  }
-
-  handleAddToFavorites(district) {
-    this.props.favoritesAction.addToFavorites(district);
-  }
-
-  handleRemoveFavorite(district) {
-    this.props.favoritesAction.removeFavorite(district)
-  }
-
-  handleGetDistrictGeo(district) {
-    this.props.districtGeoAction.getDistrictGeo(district);
-  }
 
   componentWillMount() {
     const {districts} = this.props;
@@ -54,30 +30,24 @@ class Home extends Component {
   }
 
   render() {
-    const {districts, selectedDistrict, favorites, displayFavorites} = this.props;
+    const {
+      districts,
+      selectedDistrict,
+      favorites,
+      displayFavorites,
+      favoritesAction,
+      districtGeoAction
+    } = this.props;
+
     return (
       <div style={styles.container}>
         <Paper
           square
           style={styles.aside}>
-          <List disablePadding>
-            {districts.map((district, i) => {
-              return (
-                  <ListItem
-                    key={i}
-                    button
-                    divider
-                    onClick={() => this.handleGetDistrictGeo(district.district)}>
-                    <ListItemIcon>
-                      {district.isAFavorite ?
-                        <Favorite onClick={() => this.handleRemoveFavorite(district)} style={styles.favorite}/> :
-                        <FavoriteBorder onClick={() => this.handleAddToFavorites(district)} style={styles.favorite}/>}
-                    </ListItemIcon>
-                    <ListItemText primary={district.name}/>
-                  </ListItem>
-              );
-            })}
-          </List>
+          <DistrictList
+            districts={districts}
+            favoritesAction={favoritesAction}
+            districtGeoAction={districtGeoAction}/>
         </Paper>
         <div style={styles.mainContent}>
           {districts.length ?
