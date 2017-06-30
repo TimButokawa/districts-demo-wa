@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Favorite from 'material-ui-icons/Favorite';
+import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
 import Text from 'material-ui/Text';
 
 const styles = {
@@ -17,18 +18,31 @@ const styles = {
     flex: '1'
   },
   favorite: {
-    color: '#F44336'
+    color: '#F44336',
+    cursor: 'pointer'
   }
 };
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.handleShowFavorites = this.handleShowFavorites.bind(this);
+  }
+
+  handleShowFavorites() {
+    this.props.interfaceAction.toggleDisplayFavorites();
+  }
+
   render() {
-    const {favorites} = this.props;
+    const {favorites, displayFavorites} = this.props;
+    const favorite = displayFavorites ?
+    <Favorite style={styles.favorite} onClick={() => this.handleShowFavorites()}/> :
+    <FavoriteBorder style={styles.favorite} onClick={() => this.handleShowFavorites()}/>
     return (
       <AppBar style={styles.bar}>
         <Toolbar>
           <Text style={styles.primaryText} type="subheading">Washington State Legislative Districts</Text>
-          {favorites.length ? <Favorite style={styles.favorite}/> : null}
+          {favorites.length ? favorite : null}
         </Toolbar>
       </AppBar>
     );
@@ -36,7 +50,9 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  favorites: PropTypes.array
+  favorites: PropTypes.array,
+  displayFavorites: PropTypes.bool,
+  interfaceAction: PropTypes.object
 };
 
 export default Header;
