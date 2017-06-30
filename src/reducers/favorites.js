@@ -10,12 +10,12 @@ export default function favoritesReducer(state = initialState, payload) {
     case ADD_FAVORITE:
       payload.district.isAFavorite = true;
       return {
-        data: [...state.data, payload.district.legislative_district]
+        data: [...state.data, payload.district]
       };
 
     case REMOVE_FAVORITE:
       payload.district.isAFavorite = false;
-      const index = indexOf(state.data, payload.district.legislative_district)
+      const index = indexOf(state.data, payload.district)
       return {
         data: [
           ...state.data.slice(0, index),
