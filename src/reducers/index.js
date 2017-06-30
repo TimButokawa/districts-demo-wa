@@ -5,8 +5,8 @@ import favoritesReducer from './favorites';
 import interfaceReducer from './interface';
 
 const rootReducer = combineReducers({
-  districts: districtsReducer,
-  districtsGeo: districtsGeoReducer,
+  demographics: districtsReducer,
+  districts: districtsGeoReducer,
   favorites: favoritesReducer,
   interface: interfaceReducer
 });

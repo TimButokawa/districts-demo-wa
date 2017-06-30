@@ -1,8 +1,8 @@
 import {Map} from 'immutable'
 import {
-    REQUEST_DISTRICTS,
-    REQUEST_DISTRICTS_SUCCESS,
-    REQUEST_DISTRICTS_FAILURE,
+    REQUEST_DISTRICTS_DEMO,
+    REQUEST_DISTRICTS_DEMO_SUCCESS,
+    REQUEST_DISTRICTS_DEMO_FAILURE,
     SHOW_MORE_DISTRICTS
 } from '../actions/districts';
 
@@ -14,11 +14,11 @@ const initialState = Map({
 
 export default function districtsReducer(state = initialState, action) {
   switch(action.type) {
-    case REQUEST_DISTRICTS:
+    case REQUEST_DISTRICTS_DEMO:
       return state.set('isLoading', true);
-    case REQUEST_DISTRICTS_SUCCESS:
+    case REQUEST_DISTRICTS_DEMO_SUCCESS:
     return state.set('isLoading', false).set('data', action.payload.data);
-    case REQUEST_DISTRICTS_FAILURE:
+    case REQUEST_DISTRICTS_DEMO_FAILURE:
       return state.set('isLoading', false);
     case SHOW_MORE_DISTRICTS:
       const lastIndex = state.get('visibleIndexes')[1];

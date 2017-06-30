@@ -1,7 +1,7 @@
 export function getDistrictsGeo(state) {
-  return state.districtsGeo.get('data');
+  return state.districts.get('data');
 }
 
 export function getDistrictGeo(state) {
-  return state.districtsGeo.get('selectedDistrict');
+  return state.districts.get('selectedDistrict');
 }
