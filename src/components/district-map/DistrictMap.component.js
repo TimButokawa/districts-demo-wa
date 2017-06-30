@@ -31,8 +31,8 @@ class DistrictMap extends Component {
   }
 
   render() {
-    const {districtsGeo, districtGeo} = this.props;
-
+    const {districtsGeo, districtGeo, favorites, displayFavorites} = this.props;
+    const geo = displayFavorites ? favorites : districtGeo;
     return (
       <div>
         <Map
@@ -46,7 +46,7 @@ class DistrictMap extends Component {
             url={mapConfig.tileUrl}
             accessToken={mapConfig.accessToken}/>
           <UpdateGeoJSON
-              data={districtGeo}
+              data={geo}
               style={styles.selected}
               onEachFeature={this.onEachFeature.bind(this)}/>
           <GeoJSON
@@ -62,7 +62,9 @@ class DistrictMap extends Component {
 
 DistrictMap.propTypes = {
   districtsGeo: PropTypes.array,
-  districtGeo: PropTypes.array
+  districtGeo: PropTypes.array,
+  favorites: PropTypes.array,
+  displayFavorites: PropTypes.bool
 };
 
 export default DistrictMap;
