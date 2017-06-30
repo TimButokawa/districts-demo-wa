@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-import Divider from 'material-ui/Divider';
 import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
 import Favorite from 'material-ui-icons/Favorite';
 import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
@@ -55,16 +54,19 @@ class Home extends Component {
   }
 
   render() {
-    const {districtsGeo, selectedDistrict} = this.props;
+    const {districtsGeo, selectedDistrict, favorites, displayFavorites} = this.props;
     return (
       <div style={styles.container}>
-        <Paper style={styles.aside}>
-          <List>
+        <Paper
+          square
+          style={styles.aside}>
+          <List disablePadding>
             {districtsGeo.map((district, i) => {
               return (
-                <div key={i}>
                   <ListItem
+                    key={i}
                     button
+                    divider
                     onClick={() => this.handleGetDistrictGeo(district.district)}>
                     <ListItemIcon>
                       {district.isAFavorite ?
@@ -73,14 +75,12 @@ class Home extends Component {
                     </ListItemIcon>
                     <ListItemText primary={district.name}/>
                   </ListItem>
-                  <Divider/>
-                </div>
               );
             })}
           </List>
         </Paper>
         <div style={styles.mainContent}>
-          {districtsGeo.length ? <DistrictMap districtsGeo={districtsGeo} districtGeo={selectedDistrict}/> : <Loader/>}
+          {districtsGeo.length ? <DistrictMap displayFavorites={displayFavorites} districtsGeo={districtsGeo} districtGeo={selectedDistrict} favorites={favorites}/> : <Loader/>}
         </div>
       </div>
     );
@@ -90,8 +90,10 @@ class Home extends Component {
 Home.propTypes = {
   districtsGeo: PropTypes.array,
   selectedDistrict: PropTypes.array,
+  favorites: PropTypes.array,
   districtGeoAction: PropTypes.object,
-  favoritesAction: PropTypes.object
+  favoritesAction: PropTypes.object,
+  displayFavorites: PropTypes.bool
 }
 
 export default Home;

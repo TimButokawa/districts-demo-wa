@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getDistrictsGeo, getDistrictGeo} from '../../selectors/districts-geo';
+import {getDisplayFavorites} from '../../selectors/interface';
 import * as DistrictGeoActions from '../../actions/districts-geo';
 import * as FavoritesActions from '../../actions/favorites';
 
@@ -10,7 +11,8 @@ const mapStateToProps = state => {
   return {
     districtsGeo: getDistrictsGeo(state),
     selectedDistrict: getDistrictGeo(state),
-    favorites: state.favorites
+    displayFavorites: getDisplayFavorites(state),
+    favorites: state.favorites.data
   };
 };
 
