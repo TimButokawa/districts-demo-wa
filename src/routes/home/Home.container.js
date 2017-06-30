@@ -9,7 +9,7 @@ import Home from './Home';
 
 const mapStateToProps = state => {
   return {
-    districtsGeo: getDistrictsGeo(state),
+    districts: getDistrictsGeo(state),
     selectedDistrict: getDistrictGeo(state),
     displayFavorites: getDisplayFavorites(state),
     favorites: state.favorites.data

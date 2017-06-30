@@ -47,21 +47,21 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    const {districtsGeo} = this.props;
-    if (!districtsGeo.length) {
+    const {districts} = this.props;
+    if (!districts.length) {
       this.props.districtGeoAction.requestDistrictsGeo();
     }
   }
 
   render() {
-    const {districtsGeo, selectedDistrict, favorites, displayFavorites} = this.props;
+    const {districts, selectedDistrict, favorites, displayFavorites} = this.props;
     return (
       <div style={styles.container}>
         <Paper
           square
           style={styles.aside}>
           <List disablePadding>
-            {districtsGeo.map((district, i) => {
+            {districts.map((district, i) => {
               return (
                   <ListItem
                     key={i}
@@ -80,7 +80,12 @@ class Home extends Component {
           </List>
         </Paper>
         <div style={styles.mainContent}>
-          {districtsGeo.length ? <DistrictMap displayFavorites={displayFavorites} districtsGeo={districtsGeo} districtGeo={selectedDistrict} favorites={favorites}/> : <Loader/>}
+          {districts.length ?
+            <DistrictMap
+              displayFavorites={displayFavorites}
+              districts={districts}
+              selectedDistrict={selectedDistrict}
+              favorites={favorites}/> : <Loader/>}
         </div>
       </div>
     );
@@ -88,7 +93,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  districtsGeo: PropTypes.array,
+  districts: PropTypes.array,
   selectedDistrict: PropTypes.array,
   favorites: PropTypes.array,
   districtGeoAction: PropTypes.object,
