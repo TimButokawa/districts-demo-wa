@@ -55,7 +55,8 @@ class Home extends Component {
               displayFavorites={displayFavorites}
               districts={districts}
               selectedDistrict={selectedDistrict}
-              favorites={favorites}/> : <Loader/>}
+              favorites={favorites}
+              districtGeoAction={districtGeoAction}/> : <Loader/>}
         </div>
       </div>
     );

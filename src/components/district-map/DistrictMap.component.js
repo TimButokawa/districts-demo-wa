@@ -9,30 +9,43 @@ const styles = {
     height: '600px'
   },
   default: {
-    color: '#4d4d4d',
-    weight: 1
+    color: '#4D4D4D',
+    weight: 1,
+    fillOpacity: 0.1
   },
   selected: {
+    color: '#4FC3F7',
+    weight: 2,
+    fill: false
+  },
+  favorites: {
     color: '#E60000',
-    weight: 1
+    weight: 1,
+    stroke: false,
+    fillOpacity: 0.6
   }
 };
 
 class DistrictMap extends Component {
+  constructor(props) {
+    super(props);
+    this.handleGetDistrictGeo = this.handleGetDistrictGeo.bind(this);
+  }
+
+  handleGetDistrictGeo(district) {
+    this.props.districtGeoAction.getDistrictGeo(district);
+  }
 
   onEachFeature(feature, layer) {
-    const title = feature.properties.name;
-    const template = [
-      '<div>',
-        '<h3>' + title + '</h3>',
-      '</div>'
-    ].join('');
-    layer.bindPopup(template);
+    layer.on({
+      click: () => {
+        this.handleGetDistrictGeo(feature.district)
+      }
+    });
   }
 
   render() {
     const {districts, selectedDistrict, favorites, displayFavorites} = this.props;
-    const geo = displayFavorites ? favorites : selectedDistrict;
     return (
       <div>
         <Map
@@ -46,9 +59,11 @@ class DistrictMap extends Component {
             url={mapConfig.tileUrl}
             accessToken={mapConfig.accessToken}/>
           <UpdateGeoJSON
-              data={geo}
-              style={styles.selected}
-              onEachFeature={this.onEachFeature.bind(this)}/>
+              data={selectedDistrict}
+              style={styles.selected}/>
+          {displayFavorites ? <UpdateGeoJSON
+            data={favorites}
+            style={styles.favorites}/> :  null}
           <GeoJSON
               data={districts}
               style={styles.default}
@@ -62,6 +77,7 @@ class DistrictMap extends Component {
 
 DistrictMap.propTypes = {
   districts: PropTypes.array,
+  districtGeoAction: PropTypes.object,
   selectedDistrict: PropTypes.array,
   favorites: PropTypes.array,
   displayFavorites: PropTypes.bool
