@@ -33,7 +33,8 @@ class DistrictList extends Component {
   }
 
   render() {
-    const {districts} = this.props;
+    const {districts, selectedDistrict} = this.props;
+    const activeDistrict = selectedDistrict.length ? selectedDistrict[0].district : [];
     return (
       <List disablePadding>
         {districts.map((district, i) => {
@@ -42,13 +43,18 @@ class DistrictList extends Component {
                 key={i}
                 button
                 divider
-                onClick={() => this.handleGetDistrictGeo(district.district)}>
-                <ListItemIcon>
-                  {district.isAFavorite ?
-                    <Favorite onClick={() => this.handleRemoveFavorite(district)} style={styles.favorite}/> :
-                    <FavoriteBorder onClick={() => this.handleAddToFavorites(district)} style={styles.favorite}/>}
-                </ListItemIcon>
+                onClick={() => this.handleGetDistrictGeo(district.district)}
+                style={{
+                  background: activeDistrict === district.district ? 'rgba(0, 0, 0, 0.12)' : 'none'
+                }}>
                 <ListItemText primary={district.name}/>
+                <ListItemSecondaryAction>
+                  <IconButton disableRipple>
+                    {district.isAFavorite ?
+                      <Favorite onClick={() => this.handleRemoveFavorite(district)} style={styles.favorite}/> :
+                      <FavoriteBorder onClick={() => this.handleAddToFavorites(district)} style={styles.favorite}/>}
+                  </IconButton>
+                </ListItemSecondaryAction>
               </ListItem>
           );
         })}
@@ -60,7 +66,8 @@ class DistrictList extends Component {
 DistrictList.propTypes = {
   districts: PropTypes.array.isRequired,
   favoritesAction: PropTypes.object.isRequired,
-  districtGeoAction: PropTypes.object.isRequired
+  districtGeoAction: PropTypes.object.isRequired,
+  selectedDistrict: PropTypes.array.isRequired,
 };
 
 export default DistrictList;

@@ -47,7 +47,8 @@ class Home extends Component {
           <DistrictList
             districts={districts}
             favoritesAction={favoritesAction}
-            districtGeoAction={districtGeoAction}/>
+            districtGeoAction={districtGeoAction}
+            selectedDistrict={selectedDistrict}/>
         </Paper>
         <div style={styles.mainContent}>
           {districts.length ?
