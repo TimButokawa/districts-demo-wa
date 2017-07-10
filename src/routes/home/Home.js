@@ -12,7 +12,7 @@ const styles = {
   },
   aside: {
     overflowX: 'scroll',
-    minWidth: '200px'
+    minWidth: '255px'
   },
   mainContent: {
     flexGrow: '1',

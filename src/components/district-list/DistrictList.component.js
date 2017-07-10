@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import List, {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
+import List, {ListItem, ListItemText, ListItemSecondaryAction} from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
 import Favorite from 'material-ui-icons/Favorite';
 import FavoriteBorder from 'material-ui-icons/FavoriteBorder';
 
