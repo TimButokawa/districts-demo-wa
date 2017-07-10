@@ -9,9 +9,31 @@ export const mapConfig = {
     zoom: 7,
     minZoom: 7,
     maxZoom: 11,
-    scrollWheelZoom: false
+    scrollWheelZoom: false,
+    styles: {
+      map: {
+        height: '600px'
+      },
+      default: {
+        color: '#4D4D4D',
+        weight: 1,
+        fillOpacity: 0.1
+      },
+      selected: {
+        color: '#4FC3F7',
+        weight: 2,
+        fill: false
+      },
+      favorites: {
+        color: '#E60000',
+        weight: 1,
+        stroke: false,
+        fillOpacity: 0.6
+      }
+    }
   }
 };
+
 
 export const formatDistrictGeo = districts => {
   const geoData = [];

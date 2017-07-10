@@ -4,28 +4,6 @@ import {Map, TileLayer, GeoJSON} from 'react-leaflet';
 import {mapConfig} from '../../utils/map.utils';
 import UpdateGeoJSON from '../utils/update-geo.component';
 
-const styles = {
-  map: {
-    height: '600px'
-  },
-  default: {
-    color: '#4D4D4D',
-    weight: 1,
-    fillOpacity: 0.1
-  },
-  selected: {
-    color: '#4FC3F7',
-    weight: 2,
-    fill: false
-  },
-  favorites: {
-    color: '#E60000',
-    weight: 1,
-    stroke: false,
-    fillOpacity: 0.6
-  }
-};
-
 class DistrictMap extends Component {
   constructor(props) {
     super(props);
@@ -54,19 +32,19 @@ class DistrictMap extends Component {
           minZoom={mapConfig.default.minZoom}
           maxZoom={mapConfig.default.maxZoom}
           scrollWheelZoom={mapConfig.default.scrollWheelZoom}
-          style={styles.map}>
+          style={mapConfig.default.styles.map}>
           <TileLayer
             url={mapConfig.tileUrl}
             accessToken={mapConfig.accessToken}/>
           <UpdateGeoJSON
               data={selectedDistrict}
-              style={styles.selected}/>
+              style={mapConfig.default.styles.selected}/>
           {displayFavorites ? <UpdateGeoJSON
             data={favorites}
-            style={styles.favorites}/> :  null}
+            style={mapConfig.default.styles.favorites}/> :  null}
           <GeoJSON
               data={districts}
-              style={styles.default}
+              style={mapConfig.default.styles.default}
               onEachFeature={this.onEachFeature.bind(this)}/>
         </Map>
         <div id="mapId"></div>
