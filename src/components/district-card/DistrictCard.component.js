@@ -3,18 +3,32 @@ import PropTypes from 'prop-types';
 import {
   Card,
   CardMedia,
-  CardContent,
+  CardActions,
   CardHeader
 } from 'material-ui/Card';
+import Button from 'material-ui/Button';
 
 const styles = {
   header: {
     flexDirection: 'column',
     alignItems: 'start'
+  },
+  button: {
+    color: '#4FC3F7',
+    backgroundColor: '#FEFEFE'
   }
 };
 
 class DistrictCard extends Component {
+  constructor(props) {
+    super(props);
+    this.handleToggleChart = this.handleToggleChart.bind(this);
+  }
+
+  handleToggleChart() {
+    const {action, chartType} = this.props;
+    action.toggleChart(chartType);
+  }
 
   render() {
     const {district} = this.props;
@@ -29,8 +43,12 @@ class DistrictCard extends Component {
         <CardMedia>
           {this.props.children}
         </CardMedia>
-        <CardContent>
-        </CardContent>
+        <CardActions>
+          <Button
+            style={styles.button}
+            raised
+            onClick={() => this.handleToggleChart()}>Toggle Chart Type</Button>
+        </CardActions>
       </Card>
     );
   }
@@ -38,9 +56,9 @@ class DistrictCard extends Component {
 
 DistrictCard.propTypes = {
   action: PropTypes.object.isRequired,
-  district: PropTypes.object.isRequired,
   chartType: PropTypes.string.isRequired,
-  children: PropTypes.node
+  district: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default DistrictCard;

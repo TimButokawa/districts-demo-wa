@@ -76,7 +76,7 @@ class Home extends Component {
                 action={interfaceAction}
                 district={selectedDistrict[0]}
                 chartType={chartType}>
-                <PopulationChart data={selectedDemographics} chartType='bar'/>
+                <PopulationChart data={selectedDemographics} chartType={chartType}/>
               </DistrictCard>
             </div> : null}
           {districts.length ?
