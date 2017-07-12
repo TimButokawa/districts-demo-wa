@@ -13,6 +13,10 @@ import _ from 'lodash';
 
 class PopulationChart extends Component {
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.data !== this.props.data;
+  }
+
   render() {
     const {data, chartType} = this.props;
     const chartData = _formatDataForChart(data);
