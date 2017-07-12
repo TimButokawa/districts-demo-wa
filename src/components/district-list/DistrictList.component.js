@@ -17,7 +17,7 @@ class DistrictList extends Component {
     super(props);
     this.handleAddToFavorites = this.handleAddToFavorites.bind(this);
     this.handleRemoveFavorite = this.handleRemoveFavorite.bind(this);
-    this.handleGetDistrictGeo = this.handleGetDistrictGeo.bind(this);
+    this.handleGetDistrictInfo = this.handleGetDistrictInfo.bind(this);
   }
 
   handleAddToFavorites(district) {
@@ -28,8 +28,9 @@ class DistrictList extends Component {
     this.props.favoritesAction.removeFavorite(district)
   }
 
-  handleGetDistrictGeo(district) {
+  handleGetDistrictInfo(district) {
     this.props.districtGeoAction.getDistrictGeo(district);
+    this.props.demographicsAction.getDistrictDemo(district);
   }
 
   render() {
@@ -43,7 +44,7 @@ class DistrictList extends Component {
                 key={i}
                 button
                 divider
-                onClick={() => this.handleGetDistrictGeo(district.district)}
+                onClick={() => this.handleGetDistrictInfo(district.district)}
                 style={{
                   background: activeDistrict === district.district ? 'rgba(0, 0, 0, 0.12)' : 'none'
                 }}>
@@ -67,6 +68,7 @@ DistrictList.propTypes = {
   districts: PropTypes.array.isRequired,
   favoritesAction: PropTypes.object.isRequired,
   districtGeoAction: PropTypes.object.isRequired,
+  demographicsAction: PropTypes.object.isRequired,
   selectedDistrict: PropTypes.array.isRequired,
 };
 

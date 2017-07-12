@@ -12,14 +12,6 @@ import {
 import _ from 'lodash';
 
 class PopulationChart extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    const {chartType} = this.props;
-    if (chartType !== nextProps.chartType) {
-      return true;
-    }
-
-    return false;
-  }
 
   render() {
     const {data, chartType} = this.props;

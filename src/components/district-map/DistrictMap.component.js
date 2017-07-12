@@ -7,17 +7,18 @@ import UpdateGeoJSON from '../utils/update-geo.component';
 class DistrictMap extends Component {
   constructor(props) {
     super(props);
-    this.handleGetDistrictGeo = this.handleGetDistrictGeo.bind(this);
+    this.handleGetDistrictInfo = this.handleGetDistrictInfo.bind(this);
   }
 
-  handleGetDistrictGeo(district) {
+  handleGetDistrictInfo(district) {
     this.props.districtGeoAction.getDistrictGeo(district);
+    this.props.demographicsAction.getDistrictDemo(district);
   }
 
   onEachFeature(feature, layer) {
     layer.on({
       click: () => {
-        this.handleGetDistrictGeo(feature.district)
+        this.handleGetDistrictInfo(feature.district)
       }
     });
   }
@@ -56,6 +57,7 @@ class DistrictMap extends Component {
 DistrictMap.propTypes = {
   districts: PropTypes.array,
   districtGeoAction: PropTypes.object,
+  demographicsAction: PropTypes.object,
   selectedDistrict: PropTypes.array,
   favorites: PropTypes.array,
   displayFavorites: PropTypes.bool
