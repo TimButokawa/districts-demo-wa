@@ -15,11 +15,13 @@ const styles = {
   },
   primaryText: {
     color: '#FEFEFE',
-    flex: '1'
+    flex: '1',
+    paddingLeft: '16px'
   },
   favorite: {
     color: '#F44336',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    paddingRight: '16px'
   }
 };
 
@@ -40,7 +42,7 @@ class Header extends Component {
     <FavoriteBorder style={styles.favorite} onClick={() => this.handleShowFavorites()}/>
     return (
       <AppBar style={styles.bar}>
-        <Toolbar>
+        <Toolbar disableGutters>
           <Text style={styles.primaryText} type="subheading">Washington State Legislative Districts</Text>
           {favorites.length ? favorite : null}
         </Toolbar>
