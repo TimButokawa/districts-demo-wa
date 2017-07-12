@@ -9,7 +9,7 @@ import {
   Tooltip,
   XAxis
 } from 'recharts';
-import _ from 'lodash';
+import {formatDataForChart} from '../../utils/chart.utils';
 
 class PopulationChart extends Component {
 
@@ -19,44 +19,28 @@ class PopulationChart extends Component {
 
   render() {
     const {data, chartType} = this.props;
-    const chartData = _formatDataForChart(data);
+    const chartData = formatDataForChart(data);
 
-    return chartType === 'bar' ? (
-      <ResponsiveContainer width="100%" height={150} debounce={1}>
-        <BarChart data={chartData}>
-          <Bar dataKey='population' fill='#4FC3F7'/>
-          <XAxis dataKey='year' hide/>
-          <Tooltip/>
-        </BarChart>
-      </ResponsiveContainer>
+    const chart = chartType === 'bar' ? (
+      <BarChart data={chartData}>
+        <Bar dataKey='population' fill='#4FC3F7'/>
+        <XAxis dataKey='year' hide/>
+        <Tooltip/>
+      </BarChart>
     ) : (
+      <AreaChart data={chartData}>
+        <Area dataKey='population' fill='#4FC3F7'/>
+        <XAxis dataKey='year' hide/>
+        <Tooltip/>
+      </AreaChart>
+    );
+
+    return (
       <ResponsiveContainer width="100%" height={150} debounce={1}>
-        <AreaChart data={chartData}>
-          <Area dataKey='population' fill='#4FC3F7'/>
-          <XAxis dataKey='year' hide/>
-          <Tooltip/>
-        </AreaChart>
+        {chart}
       </ResponsiveContainer>
     );
   }
-}
-
-function _formatDataForChart(data) {
-  const chartData = [];
-
-  _.forEach(data, (v, k) => {
-    if(_.includes(k, 'estimated_total_population_')) {
-      const index = _.lastIndexOf(k, '_');
-      const year = _.parseInt(k.substr(index + 1));
-      const population = _.parseInt(v);
-      chartData.push({
-        year,
-        population
-      })
-    }
-  });
-
-  return chartData;
 }
 
 PopulationChart.propTypes = {

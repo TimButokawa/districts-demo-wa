@@ -30,7 +30,6 @@ class DistrictCard extends Component {
           {this.props.children}
         </CardMedia>
         <CardContent>
-          content
         </CardContent>
       </Card>
     );

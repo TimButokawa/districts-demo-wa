@@ -53,4 +53,4 @@ export const formatDistrictGeo = districts => {
 
   districts.data = geoData.sort((a, b) => a.district - b.district);
   return districts;
-}
+};
