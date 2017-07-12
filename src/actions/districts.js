@@ -3,9 +3,9 @@ import axios from 'axios';
 export const REQUEST_DISTRICTS_DEMO = 'REQUEST_DISTRICTS_DEMO';
 export const REQUEST_DISTRICTS_DEMO_SUCCESS = 'REQUEST_DISTRICTS_DEMO_SUCCESS';
 export const REQUEST_DISTRICTS_DEMO_FAILURE = 'REQUEST_DISTRICTS_DEMO_FAILURE';
-export const SHOW_MORE_DISTRICTS = 'SHOW_MORE_DISTRICTS';
+export const GET_DISTRICT_DEMO = 'GET_DISTRICT_DEMO';
 
-export const requestDistricts = () => {
+export const requestDemographics = () => {
   return dispatch => {
     dispatch({
       type: REQUEST_DISTRICTS_DEMO
@@ -30,9 +30,9 @@ export const requestDistricts = () => {
   }
 };
 
-export const showMoreDistricts = (count = 8) => {
+export const getDistrictDemo = district => {
   return {
-    type: SHOW_MORE_DISTRICTS,
-    payload: count
+    type: GET_DISTRICT_DEMO,
+    district
   };
 }

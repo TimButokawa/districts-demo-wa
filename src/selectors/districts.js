@@ -1,6 +1,7 @@
-export function getDistricts(state) {
+export function getDistrictsDemo(state) {
   return state.demographics.get('data');
 }
-export function getVisibleIndexes(state) {
-  return state.demographics.get('visibleIndexes');
+
+export function getDistrictDemo(state) {
+  return state.demographics.get('selectedDemographics');
 }
