@@ -42,7 +42,8 @@ class DistrictMap extends Component {
               style={mapConfig.default.styles.selected}/>
           {displayFavorites ? <UpdateGeoJSON
             data={favorites}
-            style={mapConfig.default.styles.favorites}/> :  null}
+            style={mapConfig.default.styles.favorites}
+            onEachFeature={this.onEachFeature.bind(this)}/> :  null}
           <GeoJSON
               data={districts}
               style={mapConfig.default.styles.default}
