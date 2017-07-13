@@ -17,8 +17,10 @@ class DistrictMap extends Component {
 
   onEachFeature(feature, layer) {
     layer.on({
-      click: () => {
-        this.handleGetDistrictInfo(feature.district)
+      click: (e) => {
+        this.handleGetDistrictInfo(feature.district);
+        const map = this.leafletMap.leafletElement;
+        map.panTo([e.latlng.lat, e.latlng.lng]);
       }
     });
   }
@@ -28,6 +30,7 @@ class DistrictMap extends Component {
     return (
       <div>
         <Map
+          ref={m => {this.leafletMap = m}}
           center={mapConfig.default.center}
           zoom={mapConfig.default.zoom}
           minZoom={mapConfig.default.minZoom}
