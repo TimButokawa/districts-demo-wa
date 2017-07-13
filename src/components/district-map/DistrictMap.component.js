@@ -10,6 +10,15 @@ class DistrictMap extends Component {
     this.handleGetDistrictInfo = this.handleGetDistrictInfo.bind(this);
   }
 
+  componentDidUpdate() {
+    const {selectedDistrict} = this.props;
+    const map = this.leafletMap.leafletElement;
+
+    if (selectedDistrict.length) {
+      map.panTo(selectedDistrict[0].properties.roughCenter);
+    }
+  }
+
   handleGetDistrictInfo(district) {
     this.props.districtGeoAction.getDistrictGeo(district);
     this.props.demographicsAction.getDistrictDemo(district);
@@ -17,10 +26,8 @@ class DistrictMap extends Component {
 
   onEachFeature(feature, layer) {
     layer.on({
-      click: (e) => {
+      click: () => {
         this.handleGetDistrictInfo(feature.district);
-        const map = this.leafletMap.leafletElement;
-        map.panTo([e.latlng.lat, e.latlng.lng]);
       }
     });
   }
