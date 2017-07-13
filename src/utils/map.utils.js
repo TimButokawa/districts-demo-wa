@@ -43,9 +43,11 @@ export const formatDistrictGeo = districts => {
       return k === 'the_geom' ? k = 'geometry' : k;
     });
 
+    const latlng = district.geometry.coordinates[0][0][0];
     const properties = {
       name: district.name,
-      district: district.district
+      district: district.district,
+      roughCenter: [latlng[1], latlng[0]]
     };
     assign(district, {properties}, {type: 'Feature'});
     geoData.push(district);
