@@ -12,7 +12,7 @@ export const mapConfig = {
     scrollWheelZoom: false,
     styles: {
       map: {
-        height: '600px'
+        height: '94%'
       },
       default: {
         color: '#4D4D4D',

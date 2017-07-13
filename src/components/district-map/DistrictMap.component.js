@@ -28,7 +28,7 @@ class DistrictMap extends Component {
   render() {
     const {districts, selectedDistrict, favorites, displayFavorites} = this.props;
     return (
-      <div>
+      <div style={{height: '100%'}}>
         <Map
           ref={m => {this.leafletMap = m}}
           center={mapConfig.default.center}
